@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Cómo va lo del estudio?</title>
+</head>
+<style>
+    body {
+  margin: 0;
+  padding: 0;
+  background: #333;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+#countdown {
+  font-size: 2em;
+  font-weight: bold;
+  color: red;
+  animation: flicker 2s infinite;
+  text-shadow: 0 0 5px #0f0, 0 0 10px #0f0;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  45% { opacity: 0.4; }
+  55% { opacity: 0.2; }
+  65% { opacity: 0.8; }
+}
+
+
+section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.flip-container {
+    perspective: 1000px;
+    width: 300px;
+    height: 200px;
+    margin-top: 20px;
+    box-shadow: 25px 25px 2355px 25px;
+}
+
+.flip-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s ease-in-out;
+}
+
+.side {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  background: #333;
+  border-radius: 20px;
+}
+
+.side1 { transform: rotateY(0deg); }
+.side2 { transform: rotateY(120deg); }
+.side3 { transform: rotateY(240deg); }
+
+.step-0 { transform: rotateY(0deg); }
+.step-1 { transform: rotateY(-120deg); }
+.step-2 { transform: rotateY(-240deg); }
+
+#countdown {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+video {
+  display: block;
+  margin: 40px auto; /* top-bottom spacing + horizontal centering */
+  box-shadow: 25px 25px 2355px 25px;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  transform: scale(1.05);
+  color: green;
+  text-decoration: none;
+}
+
+.flicker {
+  color: green;
+  animation: flicker 1s infinite;
+  text-shadow: 0 0 5px #0f0, 0 0 10px #0f0;
+
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  45% { opacity: 0.4; }
+  55% { opacity: 0.2; }
+  65% { opacity: 0.8; }
+}
+
+
+
+</style>
+<body>
+    <section>
+        <h1>July The 4th within</h1>
+        <div id="countdown"></div>
+        <h3>What'll you have done by then?</h3>
+        <h4>What'll happen once we be on July the 4th?</h4>
+        <div class="flip-container">
+            <div class="flip-card" id="card">
+                <div class="side side1"><h5>Time</h5></div>
+                <div class="side side2"><h6>is</h6></div>
+                <div class="side side3"><h1>running out</h1></div>
+            </div>
+        </div>
+    </section>
+    
+    <h1>What's a Speedrun in Gaming?</h1>
+    <p>A speedrun in gaming is when a player tries to complete a game or a specific part thereof as quickly as possible. This often involves strategic planning, exploiting glitches or bugs and practicing specific sequences to minimize time.</p>
+    <h1>Speedrun Sample: Super Mario 64 0 Star Speedrun 6:16.60 [WORLD RECORD] | <a href="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fphoto.php%3Ffbid%3D2203337826687231%26set%3Da.183252425362458%26type%3D3&show_text=true&width=500" target="_blank" width="500" height="534" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">Observe el video completo, al final encontrará una magnífica sorpresa <span class="flicker">muy grata</span></a></h1>
+    <video width="640" height="360" controls>
+        <source src="SM64speedrun.mp4" type="video/mp4">
+    </video>
+    
+    <script>
+    const targetDate = new Date("July 4, 2025 00:00:00").getTime();
+
+    const countdown = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        clearInterval(countdown);
+        document.getElementById("countdown").innerHTML = "🎆 Happy Independence Day!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+
+    let step = 0;
+    const card = document.getElementById("card");
+
+    setInterval(() => {
+      step = (step + 1) % 3;
+      card.className = `flip-card step-${step}`;
+    }, 2500); // Rotate every 2.5 seconds
+    
+  </script>
+    
+
+</body>
+</html>
